@@ -1,0 +1,42 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+ name: web # Название нашего объекта Deployment
+spec:
+ replicas: 3 # Начнем с одного пода
+ selector: # Укажем, какие поды относятся к нашему Deployment:
+  matchLabels: # - это поды с меткой
+    app: web # app и ее значением web
+ strategy:
+   type: RollingUpdate
+   rollingUpdate:
+    maxUnavailable: 0
+    maxSurge: 100%
+ template: # Теперь зададим шаблон конфигурации пода
+   metadata:
+     name: web
+     labels:
+       app: web
+   spec:
+     initContainers:
+       - name: init-web
+         image: busybox:1.31.0
+         command: [ 'sh', '-c', 'wget -O- https://tinyurl.com/otus-k8s-intro | sh' ]
+         volumeMounts:
+           - name: app
+             mountPath: /app
+     containers:
+       - name: web
+         image: ikomarovsm/otus_k8s:v0.0.3
+         livenessProbe:
+           tcpSocket: { port: 8000 }
+         readinessProbe: # Добавим проверку готовности
+           httpGet: # веб-сервера отдавать
+             path: /index.html # контент
+             port: 8000
+         volumeMounts:
+           - name: app
+             mountPath: /app
+     volumes:
+       - name: app
+         emptyDir: { }
