@@ -15,6 +15,12 @@ spec:
   containers:
     - name: web
       image: ikomarovsm/otus_k8s:v0.0.3
+      livenessProbe:
+        tcpSocket: { port: 8000 }
+      readinessProbe: # Добавим проверку готовности
+        httpGet: # веб-сервера отдавать
+          path: /index.html # контент
+          port: 80
       volumeMounts:
         - name: app
           mountPath: /app
