@@ -1,0 +1,15 @@
+config:
+  outputs: |
+    [OUTPUT]
+        Name  es
+        Match *
+        Host  elasticsearch
+        Port  9200
+        Suppress_Type_Name On
+        Replace_Dots    On
+
+tolerations:
+  - key: node-role
+    operator: Equal
+    value: infra
+    effect: NoSchedule
