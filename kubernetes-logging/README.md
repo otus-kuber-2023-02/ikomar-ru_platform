@@ -386,14 +386,8 @@ Promtail
 + Итоговый файл prometheus-operator.values.yaml выложите в репозиторий в директорию kubernetes-logging
 + Loki доступен в графане, можно просматривать логи ingress-nginx
 + Добавил экспорт метрик в ingress-nginx, метрики доступны в прометеус
-+ 
-
-## Как запустить проект:
-+ Клонировать репозиторий
-+ Применить манифесты
-
-## Как проверить работоспособность:
- - Перейти по ссылке http://localhost:8000
++ Выгрузил из Grafana JSON с финальным Dashboard и поместите его в
+файл [nginx-ingress.json](nginx-ingress.json)
 
 ## PR checklist:
  - [x] Выставлен label с темой домашнего задания
