@@ -1,0 +1,3 @@
+[submodule "kubernetes-vault/kubernetes-vault/consul-helm"]
+	path = kubernetes-vault/kubernetes-vault/consul-helm
+	url = https://github.com/hashicorp/consul-helm.git
