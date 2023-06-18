@@ -1,0 +1,9 @@
+# https://github.com/kubernetes-csi/csi-driver-host-path/blob/master/examples/csi-storageclass.yaml
+apiVersion: storage.k8s.io/v1
+kind: StorageClass
+metadata:
+  name: csi-hostpath-sc
+provisioner: hostpath.csi.k8s.io
+reclaimPolicy: Delete
+volumeBindingMode: Immediate
+allowVolumeExpansion: true
